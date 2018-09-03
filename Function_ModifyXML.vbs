@@ -17,8 +17,9 @@ Function ModifyXML(NodePath,Attr,Data_static,Data_array,FilePath)
 On Error Resume Next
 Dim oXML,itr,ndFnd
 Set oXML = CreateObject("Microsoft.XMLDOM")
-oXML.load FilePath& "silent.xml"
 oXML.async = False
+oXML.load FilePath& "silent.xml"
+
 		If 0= oXML.parseError Then
            	If IsArray(Data_array) Then
        			Set ndFnd = oXML.selectnodes(NodePath)
