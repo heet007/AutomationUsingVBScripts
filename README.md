@@ -1,6 +1,6 @@
 # AutomationUsingVBScripts
 ++++++++++++++++++++++++++++++++++++++++++++
 
-Scripts and Functions to automate boring and long tasks for system admins and software testers. Developed in VBscript.
+Scripts and Functions to automate boring and long tasks for System admins,Repackagers and Software testers. Developed in VBscript.
 
 ++++++++++++++++++++++++++++++++++++++++++++
