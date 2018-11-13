@@ -1,0 +1,20 @@
+
+Function GetNSAccount()
+   
+    strSID = "s-1-5-20"
+    strComputer = "."
+    nResult = -1
+
+    Set objWMIService = GetObject("winmgmts:\\" & strComputer & "\root\cimv2")
+    Set objAccount = objWMIService.Get ("Win32_SID.SID='" & strSID & "'")
+
+    If objAccount.AccountName = "" Then
+        'set the property to the English defualt
+        'Property("NS_ACCOUNT") = "NETWORK SERVICE"
+    Else
+        Property("NS_ACCOUNT") = objAccount.AccountName
+    End If
+    nResult = 0
+
+End Function
+
