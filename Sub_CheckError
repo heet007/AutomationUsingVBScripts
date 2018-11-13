@@ -1,0 +1,14 @@
+'USE:- statment : checkerror
+
+'=========================
+Sub CheckError
+	Dim message, errRec
+	If Err = 0 Then Exit Sub
+	message = Err.Source & " " & Hex(Err) & ": " & Err.Description
+	If Not installer Is Nothing Then
+		Set errRec = installer.LastErrorRecord
+		If Not errRec Is Nothing Then message = message & vbNewLine & errRec.FormatText
+	End If
+	Wscript.Echo message
+	Wscript.Quit 2
+End Sub
