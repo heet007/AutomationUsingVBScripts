@@ -1,0 +1,18 @@
+Sub ActiveSetupVersioning(strAPPID)
+    Dim oShell, intVer, str1, str2
+    on error resume next
+    Set oShell = CreateObject("WScript.Shell")
+    intVer = oShell.RegRead("HKLM\Software\Microsoft\Active Setup\Installed Components\" & strAPPID & "\Version")
+
+    str1 = Split(intVer,",",-1,1)
+    str2 = str1(0)+1
+    intVer = str2 & "," & str1(1) & "," & str1(2) & "," & str1(3)
+    
+    If IsNull(intVer) or IsEmpty(intVer) then
+    	intVer = "1,0,0,0"
+    End If
+
+    oShell.RegWrite "HKLM\Software\Microsoft\Active Setup\Installed Components\" & strAPPID & "\Version", intVer, "REG_SZ"
+
+    Set oShell = Nothing
+End Sub
