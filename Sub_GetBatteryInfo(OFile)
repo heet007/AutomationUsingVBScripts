@@ -1,0 +1,20 @@
+
+Sub GetBatteryInfo(OFile)
+    On Error Resume Next
+    strComputer = "."
+    Set objWMIService = GetObject("winmgmts:\\" & strComputer & "\root\cimv2")
+    Set colItems = objWMIService.ExecQuery("Select * from Win32_Battery")
+    if colItems.Count = 0 Then
+	OFile.WriteLine("It is a Desktop running on AC")
+    Else
+    For Each objItem in colItems
+        if objItem.Availability = 2 Then
+	    OFile.WriteLine("Machine is running on AC Adapter")
+        Else
+	    if objitem.Availability = 3 Then
+		OFile.WriteLine("Machine is running on Battery")
+	    End If
+        End If
+    Next
+    End If
+End Sub
