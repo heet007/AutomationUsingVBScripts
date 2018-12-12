@@ -1,0 +1,22 @@
+Function CurrentScriptOwner
+Dim strComputer, objWMIService, colProcessList, colProperties, strNameOfUser, strUserDomain, objProcess
+strComputer = "."
+
+Set objWMIService = GetObject("winmgmts:\\" & strComputer & "\root\cimv2")
+
+Set colProcessList = objWMIService.ExecQuery("Select * from Win32_Process Where " & _
+    "Name = 'cscript.exe' or Name = 'wscript.exe'")
+
+
+For Each objProcess in colProcessList
+
+    If InStr(objProcess.CommandLine, WScript.ScriptFullName) Then
+
+        colProperties =   objProcess.GetOwner(strNameOfUser,strUserDomain)
+	CurrentScriptOwner = strUserDomain & "\" & strNameOfUser
+
+    End If
+Next
+End Function
+
+'Coding Credit : Microsoft 
