@@ -1,0 +1,18 @@
+Function GetOsVersion
+   Dim oWMIService, colItemsOS, sComputer
+   Dim sOSVersion
+
+   sComputer = "."
+   Set oWMIService = GetObject("winmgmts:{impersonationLevel=impersonate}!\\" & sComputer & "\root\cimv2")
+   Set colItemsOS = oWMIService.ExecQuery("Select * from Win32_OperatingSystem",,48)
+   For Each objItemOS in colItemsOS
+      sOSVersion = objItemOS.Version
+   Next
+   GetOsVersion = sOSVersion
+
+   Set sOSVersion = Nothing
+   Set colItemsOS = Nothing
+   Set oWMIService = Nothing
+   Set sComputer = Nothing
+End Function
+
