@@ -1,0 +1,18 @@
+Function GetOsArchitecture
+   Dim oWMIService, colItemsProcessor, sComputer
+   Dim sAddressWidth
+
+   sComputer = "."
+   Set oWMIService = GetObject("winmgmts:{impersonationLevel=impersonate}!\\" & sComputer & "\root\cimv2")
+   Set colItemsProcessor = oWMIService.ExecQuery("Select * from Win32_Processor",,48)
+   For Each objItemProcessor in colItemsProcessor
+      sAddressWidth = objItemProcessor.AddressWidth
+   Next
+   GetOsArchitecture = sAddressWidth
+
+   Set sAddressWidth = Nothing
+   Set colItemsProcessor = Nothing
+   Set oWMIService = Nothing
+   Set sComputer = Nothing
+End Function
+
